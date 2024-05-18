@@ -1,30 +1,24 @@
-from time import sleep
-from tqdm import tqdm
-# from Loading import ft_tqdm
-
-def ft_tqdm(lst) -> None:
-	import time
-
-	total = len(lst)
-	for i, elem in enumerate(lst, 1):
-		yield elem
-		progress = i * 100 // total
-		text_value = f'{progress}%|[{"=" * (progress + 32)}>{" " * (100 - (progress))}]| {round(i * (progress / 100))}/{total}'
-		print(text_value, end='\r', flush=True)
+# def ft_tqdm(lst) -> None:
+#     total = len(lst)
+#     for i, elem in enumerate(lst, 1):
+#         yield elem
+#         progress = i * 100 // total
+#         text_value = f'{progress}%|'
+#         text_value += f'[{"=" * (progress)}>{" " * (100 - (progress))}]'
+#         text_value += f'| {round(i * (progress / 100))}/{len(lst)}'
+#         print(text_value, end='\r', flush=True)
 
 
-for elem in ft_tqdm(range(333)):# Here you can do whatever you want with the elements, for example:
-	# print(elem)
-	sleep(0.005)
-print()
+# Get terminal size without importing anything
+def get_terminal_size():
+    try:
+        # Open a subprocess to execute the 'stty size' command and read the output
+        # 'stty size' returns the terminal rows and columns
+        with open('/dev/tty') as tty:
+            rows, cols = map(int, tty.readline().strip().split())
+        return cols, rows
+    except Exception:
+        return 80, 24  # Default terminal size if the actual size cannot be determined
 
-
-for elem in tqdm(range(333)):
-	sleep(0.005)
-print()
-
-
-
-
-
-
+columns, rows = get_terminal_size()
+print(f"Terminal size: {columns} columns, {rows} rows")
