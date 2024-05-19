@@ -1,9 +1,11 @@
-from setuptools import setup
+from setuptools import setup, find_packages
+
 
 setup(
     name='ft_package',
     version='0.0.1',
     # packages=['ft_package'],
+	packages=find_packages(),
     install_requires=[],
 	author='hasabir',  # Replace with your name
     author_email='hasabir@student.1337.ma ',  # Replace with your email
