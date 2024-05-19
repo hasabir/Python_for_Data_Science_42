@@ -1,8 +1,9 @@
 Metadata-Version: 2.1
 Name: ft_package
-Version: 0.1
+Version: 0.0.1
 Summary: A sample test package
-Author: Your Name
-Author-email: your_email@example.com
+Home-page: https://github.com/eagle/ft_package
+Author: hasabir
+Author-email: hasabir@student.1337.ma 
 License: MIT
 License-File: LICENSE.txt

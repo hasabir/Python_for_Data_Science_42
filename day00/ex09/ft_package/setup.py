@@ -2,13 +2,14 @@ from setuptools import setup
 
 setup(
     name='ft_package',
-    version='0.1',
+    version='0.0.1',
     # packages=['ft_package'],
     install_requires=[],
-	author='Your Name',  # Replace with your name
-    author_email='your_email@example.com',  # Replace with your email
+	author='hasabir',  # Replace with your name
+    author_email='hasabir@student.1337.ma ',  # Replace with your email
     description='A sample test package', 
-    license='MIT'
+    license='MIT',
+	url='https://github.com/eagle/ft_package'
 	# other arguments
 )
 
