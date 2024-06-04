@@ -1,51 +1,29 @@
 
-
 import matplotlib.pyplot as plt
 import pandas as pd
-
 from load_csv import load
 
-def get_info_plot(country: str, csv_file: str):
-    dataFrame = load(csv_file)
-    row = dataFrame[dataFrame.iloc[:, 0] == country]
-    
-    y = row.iloc[0].tolist()
-    y.pop(0)
-    x = list(dataFrame.columns.values)
-    x.pop(0)
-    return x, y
-
-def convert_population(population_list):
-    converted_population = []
-    for value in population_list:
-        if 'M' in value:
-            value = value.replace('M', '')
-            if '.' in value:
-                value = int(float(value) * 1_000_000)
-            else:
-                value = int(value) * 1_000_000
-        converted_population.append(value)
-    return converted_population
-
 def main():
-    x, y = get_info_plot("France", "population_total.csv")
-    x2, y2 = get_info_plot("Belgium", "population_total.csv")
+    income_per_person = load("income_per_person_gdppercapita_ppp_inflation_adjusted.csv")
+    life_expectancy = load("life_expectancy_years.csv")
 
-    y = convert_population(y)
-    y2 = convert_population(y2)
+    # Include the country column and filter for the year 1900
+    income_1900 = income_per_person[["country", "1900"]].rename(columns={"1900": "GDP_1900"})
+    life_expectancy_1900 = life_expectancy[["country", "1900"]].rename(columns={"1900": "LifeExpectancy_1900"})
 
-    fig, ax = plt.subplots()
-    plt.plot(x, y, color='red', label='France')
-    plt.plot(x2, y2, color='green', label='Belgium')
+    print(income_1900.head())
+    print(life_expectancy_1900.head())
 
-    ax.xaxis.set_major_locator(plt.MaxNLocator(10))  # Show a limited number of x ticks
-    ax.set_yticks([20_000_000, 40_000_000, 60_000_000])  # Set specific y-axis ticks
-    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'{int(x/1e6)}M'))
+    # Merge the data on the country column
+    merged_data = pd.merge(income_1900, life_expectancy_1900, on="country")
+    print(merged_data.head())
 
-    plt.xlabel('Year')
-    plt.ylabel('Population')
-    plt.legend()
-    plt.title('Population Projections')
+    # Plot the data
+    plt.figure()
+    plt.scatter(merged_data["GDP_1900"], merged_data["LifeExpectancy_1900"])
+    plt.title("1900")
+    plt.xlabel("Gross domestic product")
+    plt.ylabel("Life Expectancy")
     plt.show()
 
 if __name__ == "__main__":
