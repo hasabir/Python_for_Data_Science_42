@@ -21,7 +21,7 @@ def main():
         print(sum(c.isupper() for c in lines), ' upper letters')
         print(sum(c.islower() for c in lines), ' lower letters')
         print(sum(not c.isalnum() and c != ' ' and c != '\n' for c in lines),
-               ' punctuation marks')
+              ' punctuation marks')
         print(lines.count(' '), ' spaces')
         print(sum(c.isdigit() for c in lines), ' digits')
     except AssertionError as e:

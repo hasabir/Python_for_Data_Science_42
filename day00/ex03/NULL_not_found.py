@@ -10,7 +10,7 @@ my_types = {
 def NULL_not_found(object: any) -> int:
 	if isinstance(object, float) and object != object:
 		pass
-	elif (object != None and object != 0 and object != '' and object != False):
+	elif object not in (None, 0, '', False):
 		print ('Type not Found')
 		return 1
 	object_type = type(object).__name__

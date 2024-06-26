@@ -9,4 +9,17 @@ def ft_tqdm(lst) -> None:
         print(text_value, end='\r', flush=True)
 
 
-# Get terminal size without importing anything
+def main():
+    from time import sleep
+    from tqdm import tqdm
+
+    for elem in ft_tqdm(range(333)):
+        sleep(0.005)
+    print()
+    for elem in tqdm(range(333)):
+        sleep(0.005)
+    print()
+
+
+if __name__ == "__main__":
+    main()

@@ -2,7 +2,7 @@ import sys as sys
 
 
 def main():
-    '''sos function'''
+    '''sos programme'''
     NESTED_MORSE = {
         ' ': "/ ", 'A': '.-', 'B': '-...',
         'C': '-.-.', 'D': '-..', 'E': '.',
