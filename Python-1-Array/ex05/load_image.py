@@ -1,27 +1,31 @@
 import numpy as np
-import cv2 as cv2
+from PIL import Image
 
 
-def ft_load(path: str) -> np.array:
+def ft_load(path: str):
+    """
+    Loads an image and prints its shape.
+
+    Parameters:
+    path (str): Path to the image file.
+
+    Returns:
+    tuple: A tuple containing:
+        - numpy.ndarray: Pixel values of the loaded image.
+        - PIL.Image.Image: The image object.
+
+    Raises:
+    FileNotFoundError: If the image file is not found.
+    """
+
     try:
+        img = Image.open(path)
+        img_array = np.array(img)
+        shape = img_array.shape
+        print('The shape of image is:', shape)
+        pixel_values = list(img.getdata())
+        pixel_values = np.array(pixel_values).reshape(shape)
+        return pixel_values, img
 
-        image = cv2.imread(path)
-        if image is None:
-            raise FileNotFoundError(f"Unable to load image: {path}")
-        image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        print(f"The shape of image is: {image_rgb.shape}")
-        return image_rgb
-
-    except Exception as e:
-        print(f"Error: {str(e)}")
-        return None
-
-
-def main():
-    result = ft_load("landscape.jpg")
-    if result is not None:
-        print(result)
-
-
-if __name__ == "__main__":
-    main()
+    except FileNotFoundError:
+        raise FileNotFoundError("File Not found")

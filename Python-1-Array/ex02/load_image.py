@@ -1,16 +1,17 @@
 import numpy as np
-import cv2 as cv2
+from PIL import Image
 
 
 def ft_load(path: str) -> np.array:
     try:
 
-        image = cv2.imread(path)
-        if image is None:
-            raise FileNotFoundError(f"Unable to load image: {path}")
-        image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        print(f"The shape of image is: {image_rgb.shape}")
-        return image_rgb
+        img = Image.open(path)
+        img_array = np.array(img)
+        shape = img_array.shape
+        print('The shape of image is:', shape)
+        pixel_values = list(img.getdata())
+        pixel_values = np.array(pixel_values).reshape(shape)
+        return pixel_values
 
     except Exception as e:
         print(f"Error: {str(e)}")
