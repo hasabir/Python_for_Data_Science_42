@@ -21,7 +21,7 @@ def ft_transpose(lst: np.array) -> np.array:
 
 def rotate(image_path: str) -> None:
     """
-    Loads an image, crops it, converts it to grayscale,
+    Loads an image, crops it,
     transposes it, and displays it.
 
     Parameters:
