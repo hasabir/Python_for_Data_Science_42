@@ -1,12 +1,6 @@
 from load_image import ft_load
-import matplotlib
-matplotlib.use('TkAgg') 
-import matplotlib.pyplot as plt
 import numpy as np
-from PIL import Image
-
-#! load function for what
-
+import matplotlib.pyplot as plt
 
 def ft_transpose(lst: np.array) -> np.array:
     result = []
@@ -15,40 +9,37 @@ def ft_transpose(lst: np.array) -> np.array:
         result.append(stock)
     return np.array(result)
 
-
 def rotate(image_path: str) -> None:
-	img = Image.open(image_path)
-	width, height = img.size
-	left = (width - 400) // 2
-	top = (height - 400) // 2
-	right = (width + 400) // 2
-	bottom = (height + 400) // 2
-
-	img = img.crop((left, top, right, bottom))
-	img = img.convert('L')
-
-	img_array = np.array(img)
-
-	# img_array = ft_transpose(img_array)
-	image_new_shape = img_array[:, :, np.newaxis].shape
-	
-	print(f'The shape of the image is: {image_new_shape} or {img_array.shape}')
-	print(img_array.reshape(image_new_shape))
-	
-
-	t_image = ft_transpose(img_array)
-	print(f'New shape after Transpose is: {t_image.shape}')
-	# print(t_image.reshape(t_image[:, :, np.newaxis].shape))
-	print(t_image)
-	
-	plt.imshow(t_image, cmap='gray')
-	plt.show()
-
+    # Use ft_load instead of Image.open
+    img_array = ft_load(image_path)
+    
+    # Crop the image to 400x400
+    height, width = img_array.shape[:2]
+    left = (width - 400) // 2
+    top = (height - 400) // 2
+    img_array = img_array[top:top+400, left:left+400]
+    
+    # Convert to grayscale if it's not already
+    if len(img_array.shape) == 3:
+        img_array = np.mean(img_array, axis=2).astype(np.uint8)
+    
+    # Print original shape
+    print(f"The shape of image is: {img_array.shape}")
+    print(img_array.reshape(img_array.shape + (1,)))
+    
+    # Transpose the image
+    t_image = ft_transpose(img_array)
+    
+    # Print new shape and transposed array
+    print(f"New shape after Transpose: {t_image.shape}")
+    print(t_image)
+    
+    # Display the image
+    plt.imshow(t_image, cmap='gray')
+    plt.show()
 
 def main():
-	rotate('animal.jpeg')
-
+    rotate('animal.jpeg')
 
 if __name__ == '__main__':
-	main()
-
+    main()
