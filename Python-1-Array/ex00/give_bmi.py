@@ -8,7 +8,7 @@ def give_bmi(height: list[int | float], weight: list[int | float])\
          of BMI values'''
     np_height = np.array(height)
     np_weight = np.array(weight)
-    bmi = np_weight / (np_height * np_height)
+    bmi = np_weight / (np_height ** 2)
     return bmi.tolist()
 
 

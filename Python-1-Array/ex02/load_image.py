@@ -4,7 +4,6 @@ from PIL import Image
 
 def ft_load(path: str) -> np.array:
     try:
-
         img = Image.open(path)
         img_array = np.array(img)
         shape = img_array.shape
