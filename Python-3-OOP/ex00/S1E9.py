@@ -6,6 +6,7 @@ class Character(ABC):
 
     @abstractmethod
     def __init__(self, first_name, is_alive=True) -> None:
+        '''constructor for Character'''
         self.first_name = first_name
         self.is_alive = is_alive
 
@@ -19,8 +20,7 @@ class Stark(Character):
     """Stark: Child class for a character"""
     def __init__(self, first_name, is_alive=True) -> None:
         """Constructor for Stark"""
-        self.first_name = first_name
-        self.is_alive = is_alive
+        super().__init__(first_name, is_alive)
 
     def die(self):
         """Childe method to handle character's death."""
@@ -40,6 +40,7 @@ def main():
     print("---")
     Lyanna = Stark("Lyanna", False)
     print(Lyanna.__dict__)
+    # hodor = Character("hodor") # TypeError
 
 
 if __name__ == "__main__":

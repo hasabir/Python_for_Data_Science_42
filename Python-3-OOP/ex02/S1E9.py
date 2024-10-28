@@ -19,8 +19,7 @@ class Stark(Character):
     """Stark: Child class for a character"""
     def __init__(self, first_name, is_alive=True) -> None:
         """Constructor for Stark"""
-        self.first_name = first_name
-        self.is_alive = is_alive
+        super().__init__(first_name, is_alive)
 
     def die(self):
         """Childe method to handle character's death."""
